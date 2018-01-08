@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BankApp
 {
-    enum TypeOfAccount
+    public enum TypeOfAccount
     {
         Checkings,
         Savings,
@@ -16,21 +17,23 @@ namespace BankApp
     /// <summary>
     /// This is bank account
     /// </summary>
-    class Account
+    public class Account
     {
         #region statics
-        private static int lastAccountNumber = 0;
+       // private static int lastAccountNumber = 0;
         #endregion
 
         #region Constructor
         public Account()
         {
-            AccountNumber = ++lastAccountNumber;
+           
         }
         #endregion
 
         #region Properties
+        [Key]
         public int AccountNumber { get; private set; }
+        [StringLength(50, ErrorMessage = "Email address should be 50 charaters in lenght")]
         public string EmailAddress { get; set; }
         public string AccountName { get; set; }
         public TypeOfAccount AccountType { get; set; }

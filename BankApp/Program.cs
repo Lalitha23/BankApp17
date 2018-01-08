@@ -55,9 +55,25 @@ namespace BankApp
                         Bank.Deposit(an, amount);
                         break;
                     case "3":
+                        PrintAllAccounts();
+                      //  Console.Write("Account Number:");
+                     //   var an = Convert.ToInt32(Console.ReadLine());
+                    //    Console.Write("Amount to withdraw:");
+                    //    var amount = Convert.ToDecimal(Console.ReadLine());
+                     //   Bank.Withdraw(an, amount);
                         break;
                     case "4":
                         PrintAllAccounts();
+                        break;
+                    case "5":
+                        PrintAllAccounts();
+                        Console.Write("Account Number:");
+                        an = Convert.ToInt32(Console.ReadLine());
+                        var transactions = Bank.GetAllTransactions(an);
+                        foreach(var tran in transactions)
+                        {
+                            Console.WriteLine($"TranId:{tran.TransactionID}, TranType:{tran.TypeOfTransaction}");
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid Choice! Please try again!!");
@@ -68,7 +84,9 @@ namespace BankApp
 
         private static void PrintAllAccounts()
         {
-            var accounts = Bank.GetAllAccounts();
+            Console.Write("Email Address:");
+            var emailAddress = Console.ReadLine();
+            var accounts = Bank.GetAllAccounts(emailAddress);
             foreach (var acnt in accounts)
             {
                 Console.WriteLine($"AN:{acnt.AccountNumber}, Balance:{acnt.Balance}, TA:{acnt.AccountType}");
