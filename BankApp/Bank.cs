@@ -55,14 +55,24 @@ namespace BankApp
             }
         }
 
-       // public static void Withdraw(int accountNumber, decimal amount)
-       // {
-       //     var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
-       //     if (account != null)
-       //     {
-       //         account.Withdraw(amount);
-       //         db.SaveChanges();
-      //      }
+        public static void Withdraw(int accountNumber, decimal amount)
+        {
+            var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
+            if (account != null)
+            {
+                account.Withdraw(amount);
+                var transaction = new Transaction
+                {
+                    TransactionDate = DateTime.Now,
+                    TypeOfTransaction = TransactionType.Debit,
+                    TransactionAmount = amount,
+                    Description = "Withdraw from branch",
+                    AccountNumber = account.AccountNumber
+                };
+                db.Transactions.Add(transaction);
+                db.SaveChanges();
+            }
+        }
         
     }
 }

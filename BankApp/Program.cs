@@ -22,6 +22,7 @@ namespace BankApp
                 Console.WriteLine("2.Deposit");
                 Console.WriteLine("3.Withdraw");
                 Console.WriteLine("4.Print all accounts");
+                Console.WriteLine("5.Print all transactions");
 
                 Console.Write("Please choose one option from above:");
                 var choice = Console.ReadLine();
@@ -56,11 +57,11 @@ namespace BankApp
                         break;
                     case "3":
                         PrintAllAccounts();
-                      //  Console.Write("Account Number:");
-                     //   var an = Convert.ToInt32(Console.ReadLine());
-                    //    Console.Write("Amount to withdraw:");
-                    //    var amount = Convert.ToDecimal(Console.ReadLine());
-                     //   Bank.Withdraw(an, amount);
+                        Console.Write("Account Number:");
+                        an = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Amount to withdraw:");
+                        amount = Convert.ToDecimal(Console.ReadLine());
+                        Bank.Withdraw(an, amount);
                         break;
                     case "4":
                         PrintAllAccounts();
@@ -72,7 +73,8 @@ namespace BankApp
                         var transactions = Bank.GetAllTransactions(an);
                         foreach(var tran in transactions)
                         {
-                            Console.WriteLine($"TranId:{tran.TransactionID}, TranType:{tran.TypeOfTransaction}");
+                            Console.WriteLine($"TranId:{tran.TransactionID}, TranType:{tran.TypeOfTransaction}" +
+                                $"TranAmt:{tran.TransactionAmount}, TranDate:{tran.TransactionDate}");
                         }
                         break;
                     default:
