@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201801082002516_enablemigration.Designer.cs">
       <DependentUpon>201801082002516_enablemigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801132027394_Modelcleanup.cs" />
+    <Compile Include="Migrations\201801132027394_Modelcleanup.Designer.cs">
+      <DependentUpon>201801132027394_Modelcleanup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801082002516_enablemigration.resx">
       <DependentUpon>201801082002516_enablemigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801132027394_Modelcleanup.resx">
+      <DependentUpon>201801132027394_Modelcleanup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

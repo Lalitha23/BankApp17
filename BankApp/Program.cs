@@ -33,19 +33,34 @@ namespace BankApp
                         Console.WriteLine("Thankyou for visting!");
                         return;
                     case "1":
-                        Console.Write("Email Address:");
-                        var emailAddress = Console.ReadLine();
-                        Console.Write("Account Name:");
-                        var accountName = Console.ReadLine();
-                        var typeOfAccounts = Enum.GetNames(typeof(TypeOfAccount));
-                        for (var i = 0; i < typeOfAccounts.Length; i++)
+                            Console.Write("Email Address:");
+                            var emailAddress = Console.ReadLine();
+                            Console.Write("Account Name:");
+                            var accountName = Console.ReadLine();
+                            var typeOfAccounts = Enum.GetNames(typeof(TypeOfAccount));
+                            for (var i = 0; i < typeOfAccounts.Length; i++)
+                            {
+                                Console.WriteLine($"{i + 1}.{typeOfAccounts[i]}");
+                            }
+                            Console.Write("Type of account:");
+                        try
                         {
-                            Console.WriteLine($"{i + 1}.{typeOfAccounts[i]}");
+                            var accountType = Convert.ToInt32(Console.ReadLine());
+                            var account = Bank.CreateAccount(emailAddress, accountName, (TypeOfAccount)(accountType - 1));
+                            Console.WriteLine($"AN:{account.AccountNumber}, Balance:{account.Balance}, TA:{account.AccountType}");
                         }
-                        Console.Write("Type of account:");
-                        var accountType = Convert.ToInt32(Console.ReadLine());
-                        var account = Bank.CreateAccount(emailAddress, accountName, (TypeOfAccount)(accountType - 1));
-                        Console.WriteLine($"AN:{account.AccountNumber}, Balance:{account.Balance}, TA:{account.AccountType}");
+                        catch(FormatException)
+                        {
+                            Console.WriteLine("Account Type option is invalid.");
+                        }
+                        catch(ArgumentNullException ax)
+                        {
+                            Console.WriteLine($"Error - {ax.ParamName}, {ax.Message}");
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine($"Something went wrong:{ex.Message}");
+                        }
                         break;
                     case "2":
                         PrintAllAccounts();
