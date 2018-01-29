@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApp
 {
-    static class Bank
+    public static class Bank
     {
         private static BankModel db = new BankModel();
        // private static List<Account> accounts = new List<Account>();
@@ -64,6 +64,14 @@ namespace BankApp
             }
         }
 
+        public static Account EditAccount(Account account)
+        {
+            if (account == null)
+                throw new ArgumentNullException("account", "Invalid account");
+            var oldAccount = db.Accounts.Find(account.AccountNumber);
+            db.Entry(oldAccount).CurrentValues.SetValues(account);
+            db.SaveChanges();
+        }
         public static void Withdraw(int accountNumber, decimal amount)
         {
             var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
